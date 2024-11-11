@@ -1,1 +1,3 @@
 # StudyDocs
+
+###String class basics
