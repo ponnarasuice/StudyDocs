@@ -1,5 +1,49 @@
 # StudyDocs
 
+## JVM concepts
+VM - virtual machine :  software tool enable to run os/softwares isolated from host os
+JVM - java virtual machine: software with isolated area only runs the java code only
+```
+public class EmployeeTest {
+    private static int count = 1;
+    public static void main(String[] args) {
+        Employee emp = new Employee();
+        emp.setId(1l);emp.setName("ganesh");
+        EmployeeTest employeeTest = new EmployeeTest();
+        employeeTest.displayData(emp);
+        // shows which class loader loads this class
+        System.out.println("Classloader of this class:"
+                + EmployeeTest.class.getClassLoader());
+    }
+    private void displayData(Employee emp) {
+        System.out.println(emp.getId());
+        System.out.println(emp.getName());
+    }
+}
+```
+- When JVM start executes this program, it tries to load the class file(byte code). JVM (refers some class inside rt.jar in the $JAVA_HOME/jre/lib directory) Deligates this work to java.lang.ClassLoader.
+- class is searched in the order of classloaders: Application classloaders (usually our custom class/files in the class path). if not found, then try to load using Platform/extention class loader(usually libs). if not found there, finally checks in bootstrap classloader. class loaded by parent classloader is visible to child but not vice versa. only one class with the name is loaded. if class is not found, classnotfound exception is thrown.
+- Here, Application classloader can find EmployeeTest class and loads it. we can explicitly ask classloader to load and initialise Class.forName("java.lang.String"). if Class.load() -> it only loads into memory.  
+- During loading, static fields, methods are loaded & initialised and placed in method area. objects are stored in heap area.
+- After initialisation, JVM starts execution. Main thread is created and thread stack is created. Each thread has own thread stack. it calls methods to execute. each method has new stack once method is over it returns to the thread execution flow. 
+- Once all the methods are executed, jvm stops. we can stop explicitly by call System.exit(0)
+
+### Jit compiler
+- Interpretor interprets the byte code and convert to machine code. it is costly process. some frquently used methods are precompiled to machine code. During execution, these machine codes are dierectly used by jvm thus optimising the performance. this work is done by Jit compiler. Refer the link to refresh the jvm concepts
+https://www.freecodecamp.org/news/jvm-tutorial-java-virtual-machine-architecture-explained-for-beginners/
+
+### Garbage collectors
+
+#### Volatile keyword &  multi threaded in jvm
+```
+class Test  
+{  
+static int var=5;  
+// static volatile int var=5; // it is not stored in thread local stack
+}  
+```
+Each thread has own stack, when the method is executed, local copy of variable is cached and used for manupulation. when multi threads are access this resource then inconsistence can occur. volatile keyword makes this variable available in main thread memory instead of local thread. so each thread access only from the main memory.
+
 ## How Java string is saved in binary?
 As we know computers can understand only the binary language 0&1s. We humans use different language(English, Spanish etc) to communicate each other. In Java, String is basic entity to take human texts. Lets see how the java string is stored into computers.
 Java String is nothing but the sequence of characters. String uses UTF-16(Unicode) encoding which is standard these days. UTF-16 is a character encoding that uses one or two 16-bit units (code units) to represent each code point.  (16 bits) can encode characters from U+0000 to U+FFFF directly (these are known as the Basic Multilingual Plane or BMP characters). beyond this range (U+010000 to U+10FFFF, which are known as Supplementary Characters) are encoded in UTF-16 using two code units, called a surrogate pair.
