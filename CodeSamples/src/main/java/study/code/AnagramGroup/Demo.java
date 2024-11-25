@@ -36,7 +36,7 @@ public class Demo {
 //            }
             map.get(sortItem).add(item);
         });
-        //return new ArrayList<>(map.values());
+        //return new ArrayList<>(map.values()); // another way to send the list as array
         return map.values().stream().collect(Collectors.toList());
     }
 }
