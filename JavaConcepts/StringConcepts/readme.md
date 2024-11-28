@@ -1,5 +1,5 @@
 
-## How Java string is saved in binary?
+## How Java string is saved in binary(in computers)?
 As we know computers can understand only the binary language 0&1s. We humans use different language(English, Spanish etc) to communicate each other. In Java, String is basic entity to take human texts. Lets see how the java string is stored into computers.
 Java String is nothing but the sequence of characters. String uses UTF-16(Unicode) encoding which is standard these days. UTF-16 is a character encoding that uses one or two 16-bit units (code units) to represent each code point.  (16 bits) can encode characters from U+0000 to U+FFFF directly (these are known as the Basic Multilingual Plane or BMP characters). beyond this range (U+010000 to U+10FFFF, which are known as Supplementary Characters) are encoded in UTF-16 using two code units, called a surrogate pair.
 
@@ -48,6 +48,14 @@ after intern: true
 ```
 Using literal, string is created in string pool. if same value is created again, only variable is created and pointed to the same pool value.
 new operator only creates in the heal memory. To make it available in the pool, intern() is called.
+
+### Code generation for string concatenation with '+'
+When you concatenate strings using the + operator, the compiler typically generates bytecode that creates a new StringBuilder object, appends the strings to it, and finally calls the toString() method to obtain the resulting string.
+
+### StringBuffer and StringBuilder
+Both StringBuffer and StringBuilder are mutable classes used for efficient string manipulation. 
+stringbuffer - thread safe
+string builder - not thread safe.
 
 ### char array
 For interview programs, many times string is split into arrays and solve the problems.

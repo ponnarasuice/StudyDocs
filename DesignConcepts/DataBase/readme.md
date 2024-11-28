@@ -1,0 +1,6 @@
+### Data base vs data warehouse vs data lake
+    - Data Base: data stored in rows. used mainly in Transactional systems. 
+    - Data Warehouse: mostly column based i.e data stored in columns. Say I want to get all the previous addresses user lived in. usually OLTP(online transactional processing)/relational databases store current address. even if we store multiple address it is stored in different tables. we need to join and fetch that. instead assume address is stored in columns. if we want we simply get the address where it fetches all the address. so mainly datawarehouse for analytical, reporting purpose. eg: snowflake, amazon redshift, google bigquery, apache hive, ibm db2
+    - data lake : data warehouse is also structured and easy to query for end user. for scalability many times vertical scale is done(big cpu/ram) which is costly. so concept of storing structured/unstructured in native file storage becomes popular. we need to then process it and use for analytical purpose. eg: S3, gcp
+
+    DB sharding: in order to scale db, split the databases into multiple small nodes with same schema is called sharding. Big disadvantage is that for some data we need to join from differnt nodes.
