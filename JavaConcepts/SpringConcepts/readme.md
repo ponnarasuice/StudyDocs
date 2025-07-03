@@ -2,7 +2,10 @@
 
 ### 
 
-### how spring singleton handles multiple requests?
+### how spring singleton object handles multiple requests?
+spring creates objects which are stored in jvm heap. multiple requests are not handled by spring instead by jvm only.
+
+
 
 
 ## Web development in Spring
